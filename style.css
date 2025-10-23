@@ -1,0 +1,143 @@
+:root {
+    --bg-color: #1a1a2e;
+    --robot-primary: #e0e0e0;
+    --robot-secondary: #b0b0b0;
+    --eye-color: #00bcd4;
+    --accent-color: #f92a82;
+    --love-color: #ff69b4;
+    --font-mono: 'Roboto Mono', monospace;
+    --font-chalk: 'Permanent Marker', cursive;
+    --blackboard-color: #2c3e50;
+    --blackboard-frame: #8b5a2b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-mono);
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.scene {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 40px;
+    width: 100%;
+    max-width: 900px;
+    animation: fadeInScene 1s ease-out forwards;
+}
+
+@keyframes fadeInScene {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Robot --- */
+.robot-container {
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+#emoji-container {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 150px; pointer-events: none; z-index: 10;
+}
+
+.flying-emoji {
+    position: absolute; font-size: 24px; opacity: 0; animation: fly-out 2s ease-out forwards;
+}
+
+@keyframes fly-out {
+    0% { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-150px) scale(1.5); opacity: 0; }
+}
+
+.robot { position: relative; width: 150px; height: 220px; }
+.head {
+    width: 120px; height: 90px; background: var(--robot-primary); border-radius: 20px 20px 10px 10px; position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%); border: 3px solid var(--robot-secondary); box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.antenna {
+    width: 4px; height: 40px; background: var(--robot-secondary); position: absolute;
+    top: -40px; left: 50%; transform: translateX(-50%);
+}
+.antenna-light {
+    width: 12px; height: 12px; background: var(--accent-color); border-radius: 50%; position: absolute;
+    top: -12px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+    animation: pulse 2s infinite;
+}
+@keyframes pulse { 0% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.2); } 100% { transform: translateX(-50%) scale(1); } }
+
+.eyes { display: flex; justify-content: space-around; align-items: center; padding: 20px 15px; }
+.eye {
+    width: 30px; height: 30px; background: var(--eye-color); border-radius: 50%; border: 3px solid #111;
+    transition: background-color 0.5s; animation: blink 5s infinite;
+}
+@keyframes blink { 0%, 95%, 100% { transform: scaleY(1); } 97.5% { transform: scaleY(0.1); } }
+
+.mouth { width: 40px; height: 4px; background: var(--robot-secondary); position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); border-radius: 2px; }
+.body {
+    width: 150px; height: 130px; background: var(--robot-primary); position: absolute; top: 90px; left: 50%; transform: translateX(-50%);
+    border-radius: 10px; border: 3px solid var(--robot-secondary); box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.chest-light { width: 20px; height: 20px; background: var(--accent-color); border-radius: 4px; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 5px var(--accent-color); }
+.arm { width: 25px; height: 100px; background: var(--robot-secondary); position: absolute; top: 100px; border-radius: 10px; }
+.left-arm { left: -20px; transform: rotate(10deg); }
+.right-arm { right: -20px; transform: rotate(-10deg); }
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+
+/* --- Tablica i dialog --- */
+.blackboard-container { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; }
+.blackboard {
+    width: 100%; min-height: 250px; background: var(--blackboard-color); border: 15px solid var(--blackboard-frame);
+    border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); padding: 20px; display: flex; justify-content: center; align-items: center;
+}
+#blackboard-content {
+    font-family: var(--font-chalk); color: rgba(255, 255, 255, 0.9); font-size: 2.5em; text-align: center;
+    opacity: 0; transition: opacity 0.5s ease-in-out;
+}
+#blackboard-content.visible { opacity: 1; }
+#blackboard-content .icon-games-symbol { font-size: 2em; line-height: 1; }
+#blackboard-content .icon-button-symbol {
+    display: inline-block; padding: 10px 20px; border: 3px solid #fff; border-radius: 8px; font-size: 0.8em;
+}
+
+.dialogue-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 15px; }
+.speech-bubble {
+    background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); padding: 15px 20px; border-radius: 15px;
+    position: relative; text-align: center; backdrop-filter: blur(5px); width: 100%;
+}
+.speech-bubble::after {
+    content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+    border: 10px solid transparent; border-top-color: rgba(255, 255, 255, 0.1);
+}
+.speech-bubble p { font-size: 1.1em; line-height: 1.6; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+
+#final-button {
+    text-decoration: none; padding: 15px 30px; border-radius: 8px; font-family: var(--font-mono); font-size: 1.2em;
+    font-weight: bold; cursor: pointer; border: none; outline: none; transition: all 0.3s ease;
+    background: var(--accent-color); color: #fff; box-shadow: 0 0 20px var(--accent-color);
+}
+#final-button:hover { background: #e81d72; transform: scale(1.05); }
+
+.hidden { display: none !important; }
+.robot-love .eye { background-color: var(--love-color) !important; }
+
+@media (max-width: 768px) {
+    .scene { flex-direction: column; align-items: center; gap: 20px; }
+    .robot-container { transform-origin: bottom center; transform: scale(0.8); }
+    .blackboard-container { order: 2; }
+    .robot-container { order: 1; }
+    .speech-bubble::after { display: none; }
+    .speech-bubble { position: static; }
+}
