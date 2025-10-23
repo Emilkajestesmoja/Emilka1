@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twoje Słodkie Zadanie</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="scene">
+        <!-- Kontener z robotem -->
+        <div class="robot-container">
+            <div id="emoji-container"></div>
+            <div class="robot">
+                <div class="antenna">
+                    <div class="antenna-light"></div>
+                </div>
+                <div class="head">
+                    <div class="eyes">
+                        <div class="eye left-eye"></div>
+                        <div class="eye right-eye"></div>
+                    </div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="body">
+                    <div class="chest-light"></div>
+                </div>
+                <div class="arm left-arm"></div>
+                <div class="arm right-arm"></div>
+            </div>
+        </div>
+
+        <!-- Kontener z tablicą -->
+        <div class="blackboard-container">
+            <div class="blackboard">
+                <div id="blackboard-content" class="chalk-text"></div>
+            </div>
+            <div class="dialogue-container">
+                <div class="speech-bubble">
+                    <p id="robot-text">...</p>
+                </div>
+                <a href="https://emilkajestesmoja.github.io/Emilka2/" target="_blank" id="final-button" class="hidden">Start</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
